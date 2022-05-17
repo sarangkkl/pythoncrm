@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container">
+  
+</div>
+<div class="container">
+    <h2>Edit Bill</h2>
+    <form action="creat_handle_lead" method="POST">
+      {% csrf_token %}
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="inputEmail4">Name</label>
+          <input type="text" class="form-control" id="inputEmail4" required name="name" value="{{bill.name}}">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputPassword4">Joining Date</label>
+          <input type="text" class="form-control" id="inputPassword4" name="subject" required value="{{bill.generate_date}}" disabled>
+        </div>
+      </div> 
+      <div class="form-row">
+        
+        <div class="form-group col-md-4">
+          <label for="inputState">Source</label>
+          <select id="inputState" class="form-control" name="status">
+            <option selected value="{{bill.status}}">{{bill.status}}</option>
+            <option value="paid">Paid</option>
+            <option value="unpaid">Un paid</option>
+          </select>
+        </div>
+    </div>
+    <a href=""><button class="btn btn-primary">Send Receipt</button></a>
+      <button type="submit" class="btn btn-primary">Save Edit</button>
+    </form>
+</div>
+
+{% endblock body %}

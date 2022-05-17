@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<div class="container">
+    <h2>Create Lead</h2>
+    <form action="creat_handle_lead" method="POST">
+      {% csrf_token %}
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputEmail4">Name</label>
+          <input type="text" class="form-control" id="inputEmail4" required name="name" value="{{lead.name}}">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputPassword4">Subject</label>
+          <input type="text" class="form-control" id="inputPassword4" name="subject" required value="{{lead.subject}}">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputAddress">Email</label>
+          <input type="email" class="form-control" id="inputAddress" name="email" placeholder="abc@email.com" value="{{lead.email}}">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputAddress2">Contact Number</label>
+          <input type="number" class="form-control" id="inputAddress2" name="number"value = "{{lead.number}}" placeholder="99XX80XXXX">
+        </div>
+      </div>
+      
+      
+      <div class="form-row">
+        
+        <div class="form-group col-md-4">
+          <label for="inputState">Source</label>
+          <select id="inputState" class="form-control" name="source">
+            {% for x in source %}
+            <option value="{{x.name}}">{{x.name}}</option>
+            <!-- <option selected></option> -->
+            {% endfor %}
+            
+          </select>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputState">Assign To</label>
+          <select id="inputState" class="form-control" name="assign">
+            {% for x in agent %}
+            <option value="{{x.name}}">{{x.name}}</option>
+            <!-- <option selected></option> -->
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Initial Followup</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="followup"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Update Lead </button>
+    </form>
+</div>
+
+{% endblock body %}

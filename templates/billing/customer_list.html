@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Customers</h1>
+    <div class="row">
+        <div style="background-color: aliceblue;" class="col">
+            <h4>Total Customer</h4>
+            <p class="col align-self-center">{{ customer.count }}</p>
+        </div>
+        <div style="background-color: aliceblue;" class="col">
+            <h4>Active Customer</h4>
+            <p class="col align-self-center">5</p>
+        </div>
+        <div style="background-color: aliceblue;" class="col">
+            <h4>open Leads</h4>
+            <p class="col align-self-center">5</p>
+        </div>
+        <div style="background-color: aliceblue;" class="col">
+            <h4>Pending Leads</h4>
+            <p class="col align-self-center">7</p>
+        </div>
+    </div>
+
+    <!-- DataTales Example -->
+    <div class="card shadow my-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Customer Table</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Date Of Join</th>
+                            <th>Mobile No</th>
+                            <th>EDIT</th>
+                            <th>Payment History</th>
+                            <th>Add Services</th>
+                        </tr>
+                    </thead>
+                   
+                    <tbody>
+                        {% for x in customer %}
+                        <tr>
+                            <td>{{x.name}}</td>
+                            <td>{{x.staus}}</td>
+                            <td>{{x.joining_date}}</td>
+                            <td>{{x.mobile_no}}</td>
+                            <td><a href="/billings/edit_customer/{{x.id}}">EDIT</a></td>
+                            <!-- <td><a href="update_lead">EDIT</a></td> -->
+                            <td><a href="/billings/bill_edit/{{x.id}}">PAYMENT HISTORY</a></td>
+                            <td><a href="/billings/customer_service/{{x.id}}">Add Services</a></td>
+                        </tr>
+                        {% endfor %}
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock body %}

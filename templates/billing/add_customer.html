@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container">
+    <h2>Create Customer</h2>
+    <form action="{% url 'create_customer_handle' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputEmail4">Name</label>
+                <input type="text" class="form-control" id="inputEmail4" required name="name">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputPassword4">Company Name</label>
+                <input type="text" class="form-control" id="inputPassword4" name="company_name" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputAddress">Email 1</label>
+                <input type="email" class="form-control" id="inputAddress" name="email_1" placeholder="abc@email.com">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputAddress">Email 2</label>
+                <input type="email" class="form-control" id="inputAddress" name="email_2" placeholder="abc@email.com">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputAddress2">Contact Number</label>
+                <input type="number" class="form-control" id="inputAddress2" name="number" placeholder="99XX80XXXX">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputState">Period In Months</label>
+                <select id="inputState" class="form-control" name="period">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                </select>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputState">Recuring time</label>
+                <select id="inputState" class="form-control" name="recuring_time">
+                  <option value="1">1 Month</option>
+                  <option value="3">3 Months</option>
+                  <option value="6">6 Months</option>
+                  <option value="12">12 Months</option>      
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputAddress2">Pin Code</label>
+                <input type="number" class="form-control" id="inputAddress2" name="pin_code" placeholder="">
+            </div>
+            
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="inputEmail4">State</label>
+                <input type="text" class="form-control" id="inputEmail4" required name="state">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputEmail4">City</label>
+                <input type="text" class="form-control" id="inputEmail4" required name="city">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="">FBD</label>
+                <select id="inputState" class="form-control" name="date">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                  </select>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="">FBM</label>
+                <select id="inputState" class="form-control" name="month">
+                    <option value="1">JAN</option>
+                    <option value="2">FEB</option>
+                    <option value="3">MARCH</option>
+                    <option value="4">APRIL</option>
+                    <option value="5">MAY</option>
+                    <option value="6">JUNE</option>
+                    <option value="7">JULY</option>
+                    <option value="8">AUGUST</option>
+                    <option value="9">SEPTEMBER</option>
+                    <option value="10">OCTOBER</option>
+                    <option value="11">NOVEMBER</option>
+                    <option value="12">DECEMBER</option>
+                  </select>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="">FBY</label>
+                <select id="inputState" class="form-control" name="year">
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                    <option value="2028">2028</option>
+                    <option value="2029">2029</option>
+                    <option value="2030">2030</option>
+                  </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="myfile">Select a file to upload Documents:</label>
+                <input type="file" name="documents">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="inputAddress2">Total Amount</label>
+                <input type="number" class="form-control" id="inputAddress2" name="amount" placeholder="">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="inputAddress2">Amount Per Recuring</label>
+                <input type="number" class="form-control" id="inputAddress2" name="recuring_amount" placeholder="">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Complete Address</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="address"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mb-3">Create customer</button>
+    </form>
+</div>
+{% endblock body %}

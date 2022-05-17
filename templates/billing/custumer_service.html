@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<div class="container my-2" style="background-color: aliceblue;">
+    <div class="row">
+        <div class="col sm-3">
+            <p>Customer Name:  {{cust.name}}</p>
+        </div>
+        <div class="col">
+            <p>Active From : {{cust.joining_date}}</p>
+        </div>
+        <div class="col">
+            <p>Company Name : {{cust.company_name}}</p>
+        </div>
+        
+    </div>
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Sr.No</th>
+            <th scope="col">Service</th>
+            <th scope="col">Price</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for x in service %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{x.name}}</td>
+            <td>₹ {{x.price}}</td>
+            <td><a href="/billings/delete_service/{{x.id}}"><i class="fas fa-trash"></i></a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    <div class="row">
+        <form action="/billings/add_service/{{cust.id}}" method="POST">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Service Name</label>
+                    <input type="text" class="form-control" id="inputEmail4" required name="name">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Price</label>
+                    <input type="number" class="form-control" id="inputEmail4" required name="price">
+                </div>
+                <button type="submit" class="btn btn-primary my-2">Add Service</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock body %}

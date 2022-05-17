@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block exhead %}
+<link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+{% endblock exhead %}
+
+{% block body %}
+<div class="container my-5">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th>Subject</th>
+                <th>Assign To</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{lead.name}}</td>
+                <td>{{lead.state}}</td>
+                <td>{{lead.created_date}}</td>
+                <td>{{lead.subject}}</td>
+                <td>{{lead.assign_to}}</td>
+            </tr>
+        </tbody> 
+    </table>
+    <h3>Followups</h3>
+
+    {% if followup != null %}
+    {% for x in followup %}
+    <div class="media" style="background-color: aliceblue; margin-top: 10px; border-radius: 20px;">
+        
+        <!-- <img src="/media/{{x.image}}" class="mr-3" alt="..."> -->
+        <div class="media-body">
+            <div class="container">
+                <h4>{{x.created_by}}</h4>
+                <h5 class="mt-0">{{x.created_date}}</h5>
+                <p>{{x.body}}</p>
+                <p><a href="/media/{{x.follow_image}}"class="link-dark">Image</a><a href="/media/{{x.follow_file}}" style="margin-left: 15px;">File</a></p>
+                
+            </div>
+            
+        </div>
+      </div>
+    {% endfor %}
+    {% endif %}
+    
+    <form action="/add_follow_up/{{lead.id}}" method="post" style="margin-top: 15px;" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="myfile">Select a file:</label>
+                <!-- <input type="file" name="follow_file"> -->
+                {{form.follow_file}}
+            </div>
+            <div class="form-group col-md-6">
+                <label for="myfile">Select a image:</label>
+                <!-- <input type="file" name="follow_image"> -->
+                {{form.follow_image}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="myfile">Followup Text</label>
+            <!-- <textarea name="desc" id="" class="form-control"></textarea> -->
+            {{form.body}}
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        
+
+
+
+
+
+
+
+
+
+        
+        {{ form.media }}
+        {{form}}
+        {{ form.non_field_errors }}
+        <div class="fieldWrapper">
+            {{ form.f_lead.errors }}
+            <label for="{{ form.subject.id_for_label }}">Agent</label>
+            {{ form.f_lead }}
+        </div>
+        <div class="fieldWrapper">
+            {{ form.created_by.errors }}
+            <label for="{{ form.message.id_for_label }}">Your message:</label>
+            {{ form.creadted_by }}
+        </div>
+        <div class="fieldWrapper">
+            {{ form.body.errors }}
+            <label for="{{ form.sender.id_for_label }}">Add your Follow up</label>
+            {{ form.body }}
+        </div>
+        <div class="fieldWrapper">
+            {{ form.created_date.errors }}
+            <label for="{{ form.cc_myself.id_for_label }}">CC yourself?</label>
+            {{ form.created_date }}
+        </div>
+        <input type="submit" value="Submit">
+    </form>
+
+        <!-- {% csrf_token %}
+        {{ form.media }} 
+        {{ form.as_p }}
+      -->
+    
+       
+</div>
+
+{% endblock body %}

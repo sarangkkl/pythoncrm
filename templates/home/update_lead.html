@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block exhead %}
+
+
+{% endblock exhead %}
+
+{% block body %}
+<div class="container">
+  <h2>Update Lead</h2>
+  <form action="/update_lead_handle/{{id}}" method="POST">
+    {% csrf_token %}
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputEmail4">Name</label>
+        <input type="text" class="form-control" id="inputEmail4" required name="name" value="{{lead.name}}">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputPassword4">Subject</label>
+        <input type="text" class="form-control" id="inputPassword4" name="subject" required value="{{lead.subject}}">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputAddress">Email</label>
+        <input type="email" class="form-control" id="inputAddress" name="email" placeholder="abc@email.com" value="{{lead.email}}">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputAddress2">Contact Number</label>
+        <input type="number" class="form-control" id="inputAddress2" name="number"value = "{{lead.mobile_no}}" placeholder="99XX80XXXX">
+      </div>
+    </div>
+    
+    
+    <div class="form-row">
+      
+      <div class="form-group col-md-4">
+        <label for="inputState">Source</label>
+        <select id="inputState" class="form-control" name="source" >
+          <option selected value="{{lead.source}}">{{lead.source}}</option>
+          {% for x in source %}
+          <option value="{{x.name}}">{{x.name}}</option>
+          {% endfor %}
+          
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputState">Assign To</label>
+        <select id="inputState" class="form-control" name="assign">
+          <option selected value="{{lead.assign_to}}">{{lead.assign_to}}</option>
+          {% for x in agent %}
+          <option value="{{x.name}}">{{x.name}}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      
+      <div class="form-group col-md-4">
+        <label for="inputState">Status</label>
+        <select data-target="secondList" class="firstList selectFilter form-control" name="state">
+          <option selected value="{{lead.state}}">{{lead.state}}</option>
+          <option data-ref="one">Fresh</option>
+          <option data-ref="two">Open</option>
+          <option data-ref="pending">Pending</option>
+          <option data-ref="close">Close</option>
+      </select>
+        <!-- <select id="subject"  class="form-control" name="source" >
+          <option selected value="{{lead.state}}">{{lead.state}}</option>
+        </select> -->
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputState">If Pending / Close</label>
+        <select data-target="thirdList" class="secondList selectFilter form-control" name="pending_close">
+          <option value="-1">Select</option>
+          <option selected value="{{lead.closed_or_pending}}">{{lead.closed_or_pending}}</option>
+          <option data-ref="A" data-belong="close">We Cant Do</option>
+          <option data-ref="A" data-belong="close">Low Budget</option>
+          <option data-ref="B" data-belong="close">Client Converted</option>
+          <option data-ref="C" data-belong="pending">Pending With Customer</option>
+          <option data-ref="D" data-belong="pending">Pending On Us</option>
+          <option data-ref="E" data-belong="pending">Pending With Process</option>
+          <!-- <option data-ref="F" data-belong="three">Second Three</option> -->
+      </select>
+        <!-- <select id="topic" class="form-control" name="assign">
+          <option selected value="{{lead.assign_to}}">{{lead.assign_to}}</option>
+        </select> -->
+      </div>
+    </div>
+    <!-- <div class="form-group">
+      <label for="exampleFormControlTextarea1">Initial Followup</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="followup" value=""></textarea>
+    </div> -->
+    <button type="submit" class="btn btn-primary">Update Lead </button>
+  </form>
+</div>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script>
+  $(".selectFilter").on("change", function () { var e = $(this).data("target"), i = $(this).find(":selected").data("ref"); $("select." + e).val("-1"), null == i ? $("select." + e).find("option").each(function () { console.log("inside undefined"), $(this).removeAttr("disabled hidden") }) : $("select." + e).find("option").each(function () { var e = $(this).data("belong"), t = $(this).val(); i != e && -1 != t ? ($(this).prop("disabled", !0), $(this).prop("hidden", !0)) : ($(this).prop("disabled", !1), $(this).prop("hidden", !1)) }) });
+
+</script>
+
+{% endblock body %}

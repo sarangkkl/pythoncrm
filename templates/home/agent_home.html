@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800  my-2">Hello {{agent.name}}</h1>
+    <div class="row">
+        <div style="background-color: aliceblue;" class="col">
+            <h4>Total Leads</h4>
+            <p class="col align-self-center">{{ leads.count }}</p>
+        </div>
+        <div style="background-color: aliceblue;" class="col">
+            <h4>Fresh Leads</h4>
+            <p class="col align-self-center">{{ fresh_count }}</p>
+        </div>
+        <div style="background-color: aliceblue;" class="col">
+            <h4>open Leads</h4>
+            <p class="col align-self-center">{{ open_count }}</p>
+        </div>
+        <div style="background-color: aliceblue;" class="col">
+            <h4>Pending Leads</h4>
+            <p class="col align-self-center">{{ pending_count }}</p>
+        </div>
+    </div>
+
+    <!-- DataTales Example -->
+    <div class="card shadow my-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Leads Table</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Created</th>
+                            <th>Subject</th>
+                            <!-- <th>EDIT</th> -->
+                            <th>FOLLOWUP</th>
+                        </tr>
+                    </thead>
+                    <!-- <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Created</th>
+                            <th>Subject</th>
+                            <th>EDIT</th>
+                            <th>DElETE</th>
+                        </tr>
+                    </tfoot> -->
+                    <tbody>
+                        {% for x in leads %}
+                        <tr>
+                            <td>{{x.name}}</td>
+                            <td>{{x.state}}</td>
+                            <td>{{x.created_date}}</td>
+                            <td>{{x.subject}}</td>
+                            <!-- <td><a href="update_lead/{{x.id}}">EDIT</a></td> -->
+                            <!-- <td><a href="update_lead">EDIT</a></td> -->
+                            <td><a href="follow_up/{{x.id}}">FOLLOWUP</a></td>
+                        </tr>
+                        {% endfor %}
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock body %}
