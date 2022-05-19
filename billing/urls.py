@@ -22,5 +22,7 @@ urlpatterns = [
     # bill list handleing
     path('bill_list',views.bill_list,name="bill_list"),
     path('bill_edit/<int:id>',views.bill_edit,name="bill_edit"),
+    path('savebill_edit',views.save_bill_edit,name="save_bill_edit"),
+
 
 ]

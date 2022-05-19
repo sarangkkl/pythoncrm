@@ -70,7 +70,8 @@ def create_customer_handle(request):
 def refresh_dashboard(request):
     date = datetime.datetime.now().strftime ("%Y%m%d")
     # date = "20211205"
-    m = datetime.date.today()
+    print("The today date is",date)
+    # m = datetime.date.today()
     # print(f"the date is {m}")
     customer = Customer.objects.filter(staus = "active")
     for i in customer:
@@ -78,6 +79,7 @@ def refresh_dashboard(request):
         # print(i.eligible)
         cust_pay_date = f"{i.next_payment_year}{i.next_payment_month}{i.next_payment_date}"
         # print(f"the next payment date is  {cust_pay_date} and current date is {date}")
+        
         if cust_pay_date <= date:
             x = Bill.objects.create(name = i.name,status ="unpaid",price = i.recuring_amount,generate_date = datetime.date.today())
             x.save()
@@ -186,8 +188,22 @@ def bill_list(request):
 
 
 def bill_edit(request,id):
-    cust = Customer.objects.get(id=id)
-    bill = Bill.objects.filter(belongs_to = cust)
+    bill_obj = Bill.objects.get(id = id)
+    cust = bill_obj.belongs_to
+    # cust = Customer.objects.get(id=id)
+    # bill = Bill.objects.filter(belongs_to = cust)
     bill_form = Billing_Edit_Form
-    context = {"bill":bill,"bill_form":bill_form}
+    context = {"bill":bill_obj,"bill_form":bill_form}
     return render(request,"billing/bill_edit.html",context)
+
+def save_bill_edit(request):
+    if request.method == "POST":
+        id = request.POST.get("_id")
+        status = request.POST.get("status")
+        bill_obj = Bill.objects.get(id = id)
+        bill_obj.status = status
+        bill_obj.save()
+        return redirect('/')
+    else:
+        return HttpResponse("Babe dont play with me")
+        

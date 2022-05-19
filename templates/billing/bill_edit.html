@@ -7,20 +7,24 @@
 </div>
 <div class="container">
     <h2>Edit Bill</h2>
-    <form action="creat_handle_lead" method="POST">
+    <form action="{% url 'save_bill_edit' %}" method="POST">
       {% csrf_token %}
       <div class="form-row">
         <div class="form-group col-md-4">
           <label for="inputEmail4">Name</label>
-          <input type="text" class="form-control" id="inputEmail4" required name="name" value="{{bill.name}}">
+          <input type="text" class="form-control" id="inputEmail4" required name="name" value="{{bill.name}}" readonly>
         </div>
         <div class="form-group col-md-4">
           <label for="inputPassword4">Joining Date</label>
           <input type="text" class="form-control" id="inputPassword4" name="subject" required value="{{bill.generate_date}}" disabled>
         </div>
       </div> 
+      <div class="form-group col-md-4">
+        <label for="inputPassword4">Amount</label>
+        <input type="text" class="form-control" id="inputPassword4" name="subject" required value="{{bill.price}}" disabled>
+      </div>
       <div class="form-row">
-        
+        <input type="text" name="_id" value="{{bill.id}}" style="display: none;">
         <div class="form-group col-md-4">
           <label for="inputState">Source</label>
           <select id="inputState" class="form-control" name="status">
@@ -30,7 +34,7 @@
           </select>
         </div>
     </div>
-    <a href=""><button class="btn btn-primary">Send Receipt</button></a>
+    <a href=""><button class="btn btn-primary" disabled>Send Receipt</button></a>
       <button type="submit" class="btn btn-primary">Save Edit</button>
     </form>
 </div>
